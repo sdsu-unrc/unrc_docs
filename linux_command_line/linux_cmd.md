@@ -1,8 +1,9 @@
 ---
 author:
 - |
-    Brian Moore, University Networking and Research Computing (UNRC)\
-    [[brian.moore@sdstate.edu](brian.moore@sdstate.edu)]{}
+    Brian Moore\
+    University Networking and Research Computing (UNRC)\
+    [Brian.Moore@sdstate.edu](Brian.Moore@sdstate.edu)
 title: |
      The Linux/UNIX command line\
     An introduction for users of the cluster and other Linux servers at
