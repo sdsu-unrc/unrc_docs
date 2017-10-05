@@ -51,6 +51,11 @@ If you successfully make the connection, you will be warned that it is not encry
 
 ![vncviewer session silvertip3](./vnc_session.png)
 
+You can modify some of the properties of your VNC view session from the toolbar.  In the screenshot above, it is just barely visible along the top border.  Hover with the mouse in that area and it should appear.
+
+![vnc session toolbar](./vnc_toolbar_cropped.png)
+
+From the toolbar you can control fullscreen, scaling and session properties.
 
 Killing the VNC session
 ========================
@@ -80,4 +85,9 @@ mooreb2  55852  0.0  0.0   5716   812 pts/65   S+   16:18   0:00 grep vnc
 mooreb2@silvertip3:~>
 ```
 
-In the example above in place of `mooreb` use your own username.  In this case we found that screen 46 was active.  It is important to look for your running VNC sessions because frequently people start them and forget them, as you can see on silvertip3 we have 50 or more sessions, most of which have probably been long forgotten by their users.
+In the example above in place of `mooreb2` use your own username.  In this case we found that screen 46 was active.  It is important to look for your running VNC sessions because frequently people start them and forget them, as you can see on silvertip3 we have 50 or more sessions, most of which have probably been long forgotten by their users.
+
+Changing the resolution
+=======================
+
+A given VNC session works at a fixed resolution
