@@ -26,27 +26,24 @@ To work through the examples here, you need an account on a Linux/UNIX
 system; the specific output shown here is from `blackjack`, the
 scheduler submit node of the main SDSU Linux cluster. Our link on the
 public SDSU website is
-<http://www.sdstate.edu/technology/UNRC/Cluster/index.cfm>. Information
-is provided there on how to get an account, and how to get logged in
+<https://www.sdstate.edu/information-technology/hpc-cluster-computing>. Information is provided there on how to get an account, and how to get logged in
 when you have your credentials, how to transfer files, etc.
 
-More information on the cluster and UNRC is available on InsideState at
-<https://insidestate.sdstate.edu/technology/infotech/Units/network-research/reference/>.
-From this link, navigate to Research Computing and then the
-Documentation folder. The `bigjack_intro` document summarizes most of
-the information you need to get started.
-
-To connect to the cluster and also InsideState, you need an sdstate
-network account (email ending in `sdstate.edu`). If you are having
-trouble accessing Insidestate, email
-[brian.moore@sdstate.edu](brian.moore@sdstate.edu) to receive
-documentation by email.
 
 UNRC has a Listserv mailing list with periodic announcements for SDSU
 research server Linux users. One way to view the list is to go to
 <http://lists.sdstate.edu/scripts> and navigate to the
 UNRC\_RESEARCHCOMPUTING list; you can view previous messages there, as
 well as subscribe to the list.
+
+General documentation on the cluster is now best accessed at our [shared
+Box.com documentation
+folder](https://sdsu.box.com/s/aet477q974ad872vz4v7v24jq5vxer6u),
+<https://goo.gl/a8Z5MU>. In the documentation folder, there are two
+documents which are especially pertinent to the topics presented here.
+The `cluster_intro.pdf` document has general information about the
+cluster; the `linux_cmd.pdf` document has general help about using the
+Linux command line.
 
 Linux command line information–online sources
 ---------------------------------------------
