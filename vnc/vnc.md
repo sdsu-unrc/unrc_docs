@@ -53,7 +53,7 @@ If you successfully make the connection, you will be warned that it is not encry
 
 
 Killing the VNC session
------------------------------------
+========================
 
 The VNC session created in this example is persistent. This means that
 you can close the VNC viewer program and the session remains active,
@@ -67,3 +67,17 @@ mooreb2@silvertip3:~> vncserver -kill :53
 Killing Xvnc process ID 54279
 mooreb2@silvertip3:~>
 ```
+
+Finding your VNC sessions
+-------------------------
+
+If you don't know your screen number, you can find your running sessions from the command line.
+
+```{console}
+mooreb2@silvertip3:~> ps aux | grep mooreb2 | grep vnc
+mooreb2  55813  2.1  0.0  91268 14988 pts/65   S    16:18   0:00 Xvnc :46 -desktop X -httpd /usr/share/vnc/classes -auth /home/mooreb2/.Xauthority -geometry 1024x768 -depth 24 -rfbwait 120000 -rfbauth /home/mooreb2/.vnc/passwd -rfbport 5946 -fp /usr/share/fonts/misc:unscaled,/usr/share/fonts/local,/usr/share/fonts/75dpi:unscaled,/usr/share/fonts/100dpi:unscaled,/usr/share/fonts/Type1,/usr/share/fonts/URW,/usr/share/fonts/Speedo,/usr/share/fonts/truetype,/usr/share/fonts/uni,/usr/share/fonts/CID -noreset
+mooreb2  55852  0.0  0.0   5716   812 pts/65   S+   16:18   0:00 grep vnc
+mooreb2@silvertip3:~>
+```
+
+In the example above in place of `mooreb` use your own username.  In this case we found that screen 46 was active.  It is important to look for your running VNC sessions because frequently people start them and forget them, as you can see on silvertip3 we have 50 or more sessions, most of which have probably been long forgotten by their users.
