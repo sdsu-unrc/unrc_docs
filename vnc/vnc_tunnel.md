@@ -21,7 +21,9 @@ In the open PuTTY window, you can right click on the window bar at the
 top to bring up the menu. Navagate to the *Change Settings* menu. Click
 the *Tunnels* option under the *SSH* category.
 
-![image](putty_change_settings.png)![image](putty_tunnels_settings.png)
+|   Putty main screen         |    SSH tunnels options   |
+| :-------------------------: | :----------------------------------: |
+| ![image](putty_change_settings.png) | ![image](putty_tunnels_settings.png) |
 
 In the *Source Port* field enter the local port. In this example we will
 use 5956, to match the remote port. In the *Destination* field, enter
