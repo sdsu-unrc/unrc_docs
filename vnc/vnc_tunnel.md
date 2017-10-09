@@ -31,7 +31,6 @@ use 5956, to match the remote port. In the *Destination* field, enter
 `kojack.jacks.local:5956` (for this example–use own VNC port here.
 
 Click the *Add* button and then click *Apply*.
-
 ![image](putty_tunnels_with_entries_resized.png)
 
 VNC session to tunneled port
