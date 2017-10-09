@@ -24,7 +24,7 @@ the *Tunnels* option under the *SSH* category.
 
 |   Putty main screen         |    SSH tunnels options   |
 | :-------------------------: | :----------------------------------: |
-| ![image](putty_change_settings.png) | ![image](putty_tunnels_settings.png) |
+| ![image](putty_change_settings_resized.png) | ![image](putty_tunnels_settings_resized.png) |
 
 In the *Source Port* field enter the local port. In this example we will
 use 5956, to match the remote port. In the *Destination* field, enter
@@ -32,7 +32,7 @@ use 5956, to match the remote port. In the *Destination* field, enter
 
 Click the *Add* button and then click *Apply*.
 
-![image](putty_tunnels_with_entries.png)
+![image](putty_tunnels_with_entries_resized.png)
 
 VNC session to tunneled port
 ============================
