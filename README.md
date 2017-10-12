@@ -18,6 +18,7 @@ cluster (`blackjack/bigjack`) but also some of the other Linux servers
 (`silvertip2`,`silvertip3`, etc.) and related issues/services.
 
 [Linux Command Line](linux_command_line/linux_cmd.md)
+[Windows Command Line Connection](connectinn/Windows-CLI-Instructions.md)
 
 
 ### Contact
