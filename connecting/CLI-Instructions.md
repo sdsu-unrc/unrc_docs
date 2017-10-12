@@ -30,3 +30,19 @@ When you have successfully logged in you will see the motd and the
 command line system prompt.
 
 ![](image4.jpg)
+
+
+### Mac
+
+For the Mac OS you can use the Terminal app in the Utilities folder
+under you Applications folder. One way to quickly open Utilities is from
+the Go menu of Finder. Then go to the Terminal application and open it.
+This brings up a local command line window on your Mac. From that
+command prompt, use the ssh command to connect.
+
+Once the terminal prompt is available, type ssh
+Username@cluster.jacks.local where cluster is the node you wish to
+connect to.
+
+![](image5.jpg)
+
