@@ -44,5 +44,5 @@ Once the terminal prompt is available, type ssh
 Username@cluster.jacks.local where cluster is the node you wish to
 connect to.
 
-![](image5.jpg)
+![](image5.png)
 
