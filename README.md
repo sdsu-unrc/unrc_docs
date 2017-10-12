@@ -22,4 +22,4 @@ cluster (`blackjack/bigjack`) but also some of the other Linux servers
 
 ### Contact
 
-[Brian Moore](brian.moore@sdstate.edu)
+[Brian Moore](https://www.sdstate.edu/directory/brian-moore)
