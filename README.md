@@ -17,8 +17,11 @@ a shared folder on
 cluster (`blackjack/bigjack`) but also some of the other Linux servers
 (`silvertip2`,`silvertip3`, etc.) and related issues/services.
 
-[Linux Command Line](linux_command_line/linux_cmd.md)
-[Windows Command Line Connection](connectinn/Windows-CLI-Instructions.md)
+[Linux Command Line](linux_command_line/linux_cmd.md) General information about using the command line interface on Linux systems. 
+
+[Command Line Connection](CLI-Instructions.md) How to connect to a remote Linux server, using, for example the Windows PuTTY program, or the Terminal program on a Mac.
+
+
 
 
 ### Contact
