@@ -19,7 +19,7 @@ cluster (`blackjack/bigjack`) but also some of the other Linux servers
 
 [Linux Command Line](linux_command_line/linux_cmd.md) General information about using the command line interface on Linux systems. 
 
-[Command Line Connection](CLI-Instructions.md) How to connect to a remote Linux server, using, for example the Windows PuTTY program, or the Terminal program on a Mac.
+[Command Line Connection](connecting/CLI-Instructions.md) How to connect to a remote Linux server, using, for example the Windows PuTTY program, or the Terminal program on a Mac.
 
 
 
