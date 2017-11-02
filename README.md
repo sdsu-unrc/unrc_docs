@@ -17,10 +17,11 @@ a shared folder on
 cluster (`blackjack/bigjack`) but also some of the other Linux servers
 (`silvertip2`,`silvertip3`, etc.) and related issues/services.
 
-[Linux Command Line](linux_command_line/linux_cmd.md) General information about using the command line interface on Linux systems. 
+[Linux Command Line](linux_command_line/linux_cmd.md) General information about using the command line interface on Linux systems.
 
 [Command Line Connection](connecting/CLI-Instructions.md) How to connect to a remote Linux server, using, for example the Windows PuTTY program, or the Terminal program on a Mac.
 
+[Running on the cluster-Blast example](cluster/blast.md) How to run a simple job on the cluster, using an example of a few queries using the [BLAST+](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download) program.
 
 
 
