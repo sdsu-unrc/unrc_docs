@@ -320,6 +320,11 @@ mooreb@node064:~> cd blasttest
 mooreb@node064:~/blasttest> time blastx -num_threads $PBS_NP -db /test1/mooreb/blastdb/nr/nr -query example.fa -evalue 1e-10 -word_size 3 -gapopen 11 -gapextend 1 -outfmt 10 -out exampleout.csv
 blastx: /usr/lib64/libidn.so.11: no version information available (required by blastx)
 
+
+real    7m40.465s
+user    28m20.670s
+sys     0m12.301s
+mooreb@node064:~/blasttest>
 ```
 
 (The warning about libidn.so.11 can be ignored.)
