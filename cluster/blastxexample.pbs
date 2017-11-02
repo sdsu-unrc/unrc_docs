@@ -1,0 +1,29 @@
+#!/bin/bash
+#  File blastxexample.pbs
+#  Data and example from Priya. 
+# ~Apr. 2016 brian.Moore@sdstate.edu, padmapriya.swaminathan@sdstate.edu
+
+#PBS -l nodes=1:ppn=12
+#PBS -l walltime=1:00:00
+#PBS -W x=NACCESSPOLICY:SINGLEJOB
+
+cd $PBS_O_WORKDIR
+echo "Running in folder:" pwd
+echo "Job ran on node(s):"
+cat $PBS_NODEFILE | uniq
+echo "Total reserved processors:"
+echo $PBS_NP
+
+. ${MODULESHOME}/init/sh
+module load bio/blast+
+
+date
+
+# 2016-11-09 Note change in latest nr db location!
+
+time blastx -num_threads $PBS_NP -db /test1/mooreb/blastdb/nr/nr  \
+-query example.fa -evalue 1e-10 -word_size 3 -gapopen 11 -gapextend 1  \
+-outfmt 5 &> exampleresults.xml
+
+date
+
