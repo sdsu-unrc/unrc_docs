@@ -23,7 +23,7 @@ Links to the example files in the unrc-docs respository:
 [example.fa](./example.fa)
 
 
-```{.bash}
+```bash
 #!/bin/bash
 #  File blastxexample.pbs
 #  Data and example from Priya Swaminathan
