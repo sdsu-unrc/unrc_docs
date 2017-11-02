@@ -19,7 +19,7 @@ data and the example PBS script are located on the cluster in the folder
 `example.fa`; the example PBS script is `blastxexample.pbs` This example has been set up to illustrate basic functionality, but not take too long to run.
 
 Links to the example files in the unrc-docs respository:  
-[blastxexample.pbs](./blastxexample.pbs)  
+[blastxexample.pbs](https://github.com/sdsu-unrc/unrc_docs/blob/master/cluster/blastxexample.pbs)  
 [example.fa](./example.fa)
 
 
