@@ -1,16 +1,12 @@
----
-author:
-- |
-    Brian Moore\
-    University Networking and Research Computing (UNRC)\
-    [Brian.Moore@sdstate.edu](Brian.Moore@sdstate.edu)
-title: |
-    Running a job on the SDSU Linux cluster: BLAST+ example
----
 
+---
 
 Running a job on the cluster: BLAST+
-=============================
+===
+
+[Brian.Moore@sdstate.edu](Brian.Moore@sdstate.edu)  University Networking and Research Computing (UNRC)
+
+---
 
 To run a job on the cluster, you need to configure a PBS script to deploy your job to a node.  The script consists of resource requests followed by the program command.  You need to know how to run your program before you configure the script.  This might require testing/development on other servers or brief interactive tests on the head node.  We assume you have done that.  Here we present an example of the actual job submission process.
 
@@ -22,15 +18,20 @@ data and the example PBS script are located at
 `/test1/examples/blast`. The query sequences are in the file
 `example.fa`; the example PBS script is `blastxexample.pbs` This example has been set up to illustrate basic functionality, but not take too long to run.
 
-``` {.bash}
+Links to the example files in the unrc-docs respository:  
+[blastxexample.pbs](./blastxexample.pbs)  
+[example.fa](./example.fa)
+
+
+```{.bash}
 #!/bin/bash
 #  File blastxexample.pbs
-#  Data and example from Priya.
+#  Data and example from Priya Swaminathan
 # ~Nov 2017 brian.Moore@sdstate.edu, padmapriya.swaminathan@sdstate.edu
 
 #PBS -q debug
 #PBS -l nodes=1:ppn=4
-#PBS -l walltime=6:00:00
+#PBS -l walltime=1:00:00
 #PBS -W x=NACCESSPOLICY:SINGLEJOB
 
 cd $PBS_O_WORKDIR
@@ -45,9 +46,10 @@ module load bio/blast+
 
 date
 
-time blastx -num_threads $PBS_NP -db /home/mooreb/blast/db/nr/nr  \
+# 2016-11-09 Note change in latest nr db location!
+time blastx -num_threads $PBS_NP -db /test1/mooreb/blastdb/nr/nr  \
 -query example.fa -evalue 1e-10 -word_size 3 -gapopen 11 -gapextend 1  \
--outfmt 5 &> exampleresults.xml
+ -outfmt 10 -out exampleout.csv
 
 date
 ```
