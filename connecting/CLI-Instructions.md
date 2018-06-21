@@ -40,8 +40,12 @@ the Go menu of Finder. Then go to the Terminal application and open it.
 This brings up a local command line window on your Mac. From that
 command prompt, use the ssh command to connect.
 
-Once the terminal prompt is available, type ssh
-Username@cluster.jacks.local where cluster is the node you wish to
-connect to.
+Once the terminal prompt is available, if you wanted to make a connection to, for example, blackjack, type a command like:
 
-![](https://raw.githubusercontent.com/sdsu-unrc/unrc_docs/master/connecting/mactermcap.png)
+```bash
+ssh mooreb@blackjack.jacks.local
+```
+
+but substitute your username on the cluster for the example (`mooreb`) above.
+
+![Apple Mac terminal ssh connection](https://raw.githubusercontent.com/sdsu-unrc/unrc_docs/master/connecting/mactermcap.png)
