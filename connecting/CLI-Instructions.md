@@ -8,14 +8,14 @@ You can download and run the Windows installer, or you can just download
 the executable of the program itself, putty.exe, and put it directly on
 your desktop. When you start PuTTY, you will be presented with a
 connection screen. Assuming you want to make your first connection to
-flapjack, enter flapjack.jacks.local in the Host Name field.
+blackjack, enter blackjack.jacks.local in the Host Name field.
 
-![](https://raw.githubusercontent.com/sdsu-unrc/unrc_docs/master/connecting/image1.jpg)
+![PuTTY Session screen](https://raw.githubusercontent.com/sdsu-unrc/unrc_docs/master/connecting/puttycap01.png)
 
 When you click Open you should see the black PuTTY terminal window
 appear and then a message similar to the following:
 
-![](https://raw.githubusercontent.com/sdsu-unrc/unrc_docs/master/connecting/image2.jpg)
+![PuTTY first time connection warning](https://raw.githubusercontent.com/sdsu-unrc/unrc_docs/master/connecting/puttycap02.png)
 
 This message about the encryption key should appear only the first time
 you connect to a given server from a particular computer. PuTTY is an
@@ -24,12 +24,12 @@ clear to transfer the key. So click yes. Then you will see the login
 prompt for the server. Enter your username and then your password. Note
 that no characters will appear at all as you type the password.
 
-![](https://raw.githubusercontent.com/sdsu-unrc/unrc_docs/master/connecting/image3.jpg)
+![PuTTY terminal password prompt](https://raw.githubusercontent.com/sdsu-unrc/unrc_docs/master/connecting/puttycap03cropped.png)
 
 When you have successfully logged in you will see the motd and the
 command line system prompt.
 
-![](https://raw.githubusercontent.com/sdsu-unrc/unrc_docs/master/connecting/image4.jpg)
+![PuTTY terminal session successful login example on blackjack](https://raw.githubusercontent.com/sdsu-unrc/unrc_docs/master/connecting/puttycap04.png)
 
 
 ### Mac
@@ -44,4 +44,4 @@ Once the terminal prompt is available, type ssh
 Username@cluster.jacks.local where cluster is the node you wish to
 connect to.
 
-![](https://raw.githubusercontent.com/sdsu-unrc/unrc_docs/master/connecting/image5.png)
+![](https://raw.githubusercontent.com/sdsu-unrc/unrc_docs/master/connecting/mactermcap.png)
