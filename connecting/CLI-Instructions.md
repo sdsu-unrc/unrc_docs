@@ -42,7 +42,7 @@ command prompt, use the ssh command to connect.
 
 Once the terminal prompt is available, if you wanted to make a connection to, for example, blackjack, type a command like:
 
-```bash
+```
 ssh mooreb@blackjack.jacks.local
 ```
 
