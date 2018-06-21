@@ -10,12 +10,12 @@ your desktop. When you start PuTTY, you will be presented with a
 connection screen. Assuming you want to make your first connection to
 flapjack, enter flapjack.jacks.local in the Host Name field.
 
-![](image1.jpg)
+![](https://raw.githubusercontent.com/sdsu-unrc/unrc_docs/master/connecting/image1.jpg)
 
 When you click Open you should see the black PuTTY terminal window
 appear and then a message similar to the following:
 
-![](image2.jpg)
+![](https://raw.githubusercontent.com/sdsu-unrc/unrc_docs/master/connecting/image2.jpg)
 
 This message about the encryption key should appear only the first time
 you connect to a given server from a particular computer. PuTTY is an
@@ -24,12 +24,12 @@ clear to transfer the key. So click yes. Then you will see the login
 prompt for the server. Enter your username and then your password. Note
 that no characters will appear at all as you type the password.
 
-![](image3.jpg)
+![](https://raw.githubusercontent.com/sdsu-unrc/unrc_docs/master/connecting/image3.jpg)
 
 When you have successfully logged in you will see the motd and the
 command line system prompt.
 
-![](image4.jpg)
+![](https://raw.githubusercontent.com/sdsu-unrc/unrc_docs/master/connecting/image4.jpg)
 
 
 ### Mac
@@ -44,5 +44,4 @@ Once the terminal prompt is available, type ssh
 Username@cluster.jacks.local where cluster is the node you wish to
 connect to.
 
-![](image5.png)
-
+![](https://raw.githubusercontent.com/sdsu-unrc/unrc_docs/master/connecting/image5.png)
