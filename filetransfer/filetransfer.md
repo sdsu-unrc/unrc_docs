@@ -14,20 +14,19 @@ If it is the first time you have connected to the server in question, you might 
 
 ![WinSCP first time connection warning](https://raw.githubusercontent.com/sdsu-unrc/unrc_docs/master/filetransfer/winscp02.png)
 
-Click yes and the WinSCP file transfer screen should appear.
+Click yes and the WinSCP file transfer screen should appear.  After that you should be presented with with two side-by-side windows with a view of the files systems on both machines.
+
+![WinSCP file transfer window](https://raw.githubusercontent.com/sdsu-unrc/unrc_docs/master/filetransfer/winscp03.png)
+
+Now at this point you can navigate your file systems independently within each window,
+find the file you want to transfer, then transfer it either by dragging and dropping, or using the context menu (right click on a file) to see the options.
+
 
 ### Mac
 
-For the Mac OS you can use the Terminal app in the Utilities folder
-under you Applications folder. One way to quickly open Utilities is from
-the Go menu of Finder. Then go to the Terminal application and open it.
-This brings up a local command line window on your Mac. From that
-command prompt, use the ssh command to connect.
+A commonly used GUI file trasnfer program is FileZilla (https://filezilla-project.org, or use the App Store).  Once installed and started, it functions very similar to WinSCP.
 
-Once the terminal prompt is available, if you wanted to make a connection to, for example, blackjack, type a command like:
+![FileZilla file transfer window](https://raw.githubusercontent.com/sdsu-unrc/unrc_docs/master/filetransfer/filezilla.png)
 
-```
-ssh mooreb@blackjack.jacks.local
-```
 
-but substitute your username on the cluster for the example (`mooreb`) above.
+Note here that we enter the server name with the prefix sftp:// to force the secure ftp protocol. Another way to ensure this is to put 22 in the Port entry.
