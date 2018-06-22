@@ -30,3 +30,34 @@ A commonly used GUI file trasnfer program is FileZilla (https://filezilla-projec
 
 
 Note here that we enter the server name with the prefix sftp:// to force the secure ftp protocol. Another way to ensure this is to put 22 in the Port entry.
+
+### Command-line file transfers
+
+On UNIX/Linux or Mac systems, we can also transfer files from system to system by using the command line, for example by using the `scp` command, which stands for “secure copy” but more importantly *remote* secure copy. `scp` is similar to `cp` but either source or target is on another system. See Wikipedia article [Secure copy](https://en.wikipedia.org/wiki/Secure_copy).
+
+Example: copying a file from blackjack to another system:
+
+```console
+mooreb@blackjack:~> scp gsl/gsl-1.14.tar.gz  mooreb@silvertip.jacks.local:
+Password:
+gsl-1.14.tar.gz                             100% 3089KB   3.0MB/s   00:00
+mooreb@blackjack:~>
+```
+
+By default, the file will be copied to the top level folder of the user
+specified on the remote system. This can be modified by adding
+sub-folders on the remote end.
+
+```console
+mooreb@blackjack:~> scp fdt.jar mooreb@silvertip.jacks.local:folder/subfolder
+```
+
+Of course you must know that these folders exist on the target.
+
+When invoking the `cp` or `scp` command, if the target name is a folder,
+the file is put into the folder. If the target name does not exist, the
+file is copied and given the target name.
+
+Note that both cp and scp have a recursive option, `-r`, that will
+operate on a folder instead of a file, and recursively copy the entire
+tree.
