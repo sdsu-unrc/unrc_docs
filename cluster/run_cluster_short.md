@@ -117,8 +117,7 @@ mooreb@blackjack:~/testprogram> module load nano
 mooreb@blackjack:~/testprogram> nano simple.pbs
 ```
 
-![screen shot of nano editor running in a terminal, viewing file simple.pbs](https://raw.githubusercontent.com/sdsu-unrc/unrc_docs/ma
-ster/cluster/nanocap01.png)
+![screen shot of nano editor running in a terminal, viewing file simple.pbs](https://raw.githubusercontent.com/sdsu-unrc/unrc_docs/master/cluster/nanocap01.png)
 
 
 At this point you can move the cursor around with the arrow keys and type text or delete characters, etc. Use Ctrl-G for help and Ctrl-X to exit; it will prompt you to save if you have any changes.
