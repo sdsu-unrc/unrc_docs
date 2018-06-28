@@ -2,29 +2,11 @@
 
 ## Why use the scheduler (PBS script)?
 
-The organization of the Linux compute cluster  is with one or a few
-public facing login nodes (blackjack, etc.) and many identical worker nodes behind
-a private network switch. In our case we have about 50 worker nodes,
-organized into different groups; the largest (and default) group is the
-`batch2` queue with about 45 nodes.
+The organization of the Linux compute cluster  is with one or a few public facing login nodes (`blackjack`, etc.) and many identical worker nodes behind a private network switch. In our case we have about 60 worker nodes, organized into different groups; the largest (and default) group is the `batch2` queue with about 45 nodes.
 
-The scheduler is the route to using the worker nodes. The syntax and
-mastery of the scheduler/PBS scripts can be demanding but it is crucial
-to making use of the cluster as a clustered system. If you find that
-your needs are satisfied by running jobs only interactively on the head
-node, you should try to migrate to one of our shared-use non-clustered
-Linux systems (e.g. silvertip).
+The scheduler is the route to using the worker nodes. The syntax and mastery of the scheduler/PBS scripts can be demanding but it is crucial to making use of the cluster as a clustered system. If you find that your needs are satisfied by running jobs only interactively on the head node, you should try to migrate to one of our shared-use non-clustered Linux systems (e.g. silvertip); another alternative is to use `flapjack`, which is a public-facing cluster node
 
-This document aims to help users run jobs on the SDSU Linux cluster
-(blackjack/bigjack), using the Moab/PBS scheduler. There are two key elements.
-First, the user must know the correct syntax to run the program from the
-command line; if necessary, interactive (non-scheduled) testing can be
-done with small jobs to discover the syntax. Second, the command (or
-commands) is/are copied into a PBS scheduler script (usually near the
-end of the script) and submitted to the queue. If necessary, directives
-are added (near the top of the script) to request resources (nodes,
-processors, walltime, etc.) in excess or different from the default
-values.
+This document aims to help users run jobs on the SDSU Linux cluster using the Moab/PBS scheduler. There are two key elements. First, the user must know the correct syntax to run the program from the command line; if necessary, interactive (non-scheduled) testing can be done with small jobs to discover the syntax. Second, the command (or commands) is/are copied into a PBS scheduler script (usually near the end of the script) and submitted to the queue. If necessary, directives are added (near the top of the script) to request resources (nodes, processors, walltime, etc.) in excess or different from the default values.
 
 
 ## Short tutorial example: compiling and running a single-thread C program
@@ -52,17 +34,11 @@ For this simple C program, use the gcc compiler:
 gcc prime_ex.c
 ```
 
-This will create an executable file named `a.out`. You can rename
-`a.out` to whatever you like (using `mv`), or you can add an option `-o`
-in the compile to explicitly name the executable created by the compile.
+This will create an executable file named `a.out`. You can rename `a.out` to whatever you like (using `mv`), or you can add an option `-o` in the compile to explicitly name the executable created by the compile.
 
-## Running the program on the command line interactively
+## Testing: running the program on the command line interactively
 
-The program computes all the prime numbers less than or equal to a given
-input number and writes back one line with the number of primes found.
-So this particular program takes as input interactively one integer
-number. To run this program for a small argument, from the command line,
-interactively, an example session is shown.
+The program computes all the prime numbers less than or equal to a given input number and writes back one line with the number of primes found. So this particular program takes as input interactively one integer number. To run this program for a small argument, from the command line, interactively, an example session is shown.
 
 ``` {.console}
 mooreb@blackjack:~/testprogram> ./a.out
@@ -73,58 +49,56 @@ The number of primes less than or equal to 100 is 25
 mooreb@blackjack:~/testprogram>
 ```
 
-The program is written to write the prompt and wait for input. Then when
-it receives the number and the user hits return, the program runs and
-the output is written to the screen.
+The program is written to write the prompt and wait for input. Then when it receives the number and the user hits return, the program runs and the output is written to the screen.
 
 (Btw, to check if the program is correct, see for example
 <http://primes.utm.edu/howmany.shtml>).
 
-This program runs instantaneously when the input is 100; we can make
-that number bigger and bigger and eventually it will take a while to
-compute. So this is a small example of a program that would be useful to
-run in background (and, eventually, on a worker node, not blackjack
-itself).
+This program runs instantaneously when the input is 100; we can make that number bigger and bigger and eventually it will take a while to compute. So this is a small example of a program that would be useful to run in background (and, eventually, on a worker node, not blackjack itself).
 
 ### input redirect
 
-Our very simple `prime_ex` program does not take much in input, just one
-int, but some programs take very large input sets, so that it is
-inconvenient to type them all on the command line. You can put your
-inputs in a file and then redirect the file to the program as input.
+Our very simple `prime_ex` program does not take much in input, just one int, but some programs take very large input sets, so that it is inconvenient to type them all on the command line. You can put your inputs in a file and then redirect the file to the program as input.
 
-To create an input file you can use an editor (see the section on
-Linux/UNIX editors) or you can just do:\
+To create an input file you can use an editor (see the section on Linux/UNIX editors) or you can just do:\
 
 ``` {.bash}
-echo "1000" > infile
+echo "1000000" > infile
 ```
 
-and it will create a textfile called `infile` with just the given echoed
-characters in it. Then use this as input redirect:\
+and it will create a textfile called `infile` with just the given echoed characters in it.  With this input value (10000000), it should take about 2 min to finish; if you want it to run faster, use a smaller number.
+
+
+Then you can use this file as input redirect to the program
 
 ``` {.bash}
 ./a.out < infile
 ```
 
+
 ### output redirect
 
-You will notice that when we run with input redirect, it still writes
-the output to the screen. We can make that output go to a file instead
-with an output redirect.
+You will notice that when we run with input redirect, it still writes the output to the screen. We can make that output go to a file instead with an output redirect.
 
 ``` {.bash}
 ./a.out < infile &> outfile
 ```
 
-Then you can use the `more` command to check the contents of the output
-file.
+This will run, but you will notice it ties up the terminal while the job is executing; you can't type commands.  If you want the job to run, and release the terminal, also put the job in background.
+
+### putting job in background
+
+Here is an example syntax.
+
+``` {.bash}
+./a.out < infile &> outfile &
+```
+
+Then you can use the `more` command to check the contents of the output file.
 
 ## PBS script
 
-Following the same example, we had the program in a folder beneath the
-home directory called testfolder. Copy a simple PBS script into that
-folder:
+Following the same example, we had the program in a folder beneath the home directory called testfolder. Copy a simple PBS script into that folder:
 
 ``` {.console}
 mooreb@blackjack:~> cp /home/mooreb/examples/simple/simple.pbs testprogram/
@@ -136,43 +110,25 @@ mooreb@blackjack:~/testprogram>
 
 ### Text editor
 
-Now, open the file `simple.pbs` in a text editor. We chose the nano
-editor because it is simple, but you can use vi or emacs if you are
-familiar with those. See Figure \[nano\_ex1\].
+Now, open the file `simple.pbs` in a text editor. We chose the nano editor because it is simple, but you can use vi or emacs if you are familiar with those.
 
 ``` {.console}
 mooreb@blackjack:~/testprogram> module load nano
 mooreb@blackjack:~/testprogram> nano simple.pbs
 ```
 
-At this point you can move the cursor around with the arrow keys and
-type text or delete characters, etc. Use Ctrl-G for help and Ctrl-X to
-exit; it will prompt you to save if you have any changes.
+![screen shot of nano editor running in a terminal, viewing file simple.pbs](https://raw.githubusercontent.com/sdsu-unrc/unrc_docs/ma
+ster/cluster/nanocap01.png)
 
-Here we want do to just a simple edit: add the line to run our program.
-So, position your cursor on a line below the last line (lines beginning
-with \# are comments) and type:
 
-``` {.bash}
-./a.out < infile
-```
+At this point you can move the cursor around with the arrow keys and type text or delete characters, etc. Use Ctrl-G for help and Ctrl-X to exit; it will prompt you to save if you have any changes.
 
-When you are done, the screen should look something like Fig.
-\[nano\_ex2\].
 
-Then use `Ctrl-X` to save the file. Once you have the editor closed, you
-can use the `more` command to check the contents and make sure the edit
-was done how you wanted.
-
-Why did we not redirect the output to a file? The scheduler will
-automatically produce an output file, so we don’t need to re-direct the
-output. We could, but for such a small job, here there is no need.
+Why did we not redirect the output to a file? The scheduler will automatically produce an output file, so we don’t need to re-direct the output. We could, but for such a small job, here there is no need.
 
 ## Submitting the PBS script
 
-Now, if we are in the folder that has the submit script, and the
-program, and the input file, we use the `qsub` command to submit the
-job.
+Now, if we are in the folder that has the submit script, and the program, and the input file, we use the `qsub` command to submit the job.
 
 ``` {.console}
 mooreb@blackjack:~/testprogram> qsub simple.pbs
