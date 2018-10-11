@@ -50,6 +50,114 @@ From “Why High Throughput Computing” slides by Lauren Michael of
 Wisconsin’s CHTC
 
 
+### MPI: Message Passing Interface
+
+MPI is an API (application programming interface) for distributed memory
+computing. Several implementations exist. Usually a C or fortran (less
+commonly C++) source code.
+
+-   <http://www.mcs.anl.gov/research/projects/mpi/>
+    The standard definition, from Argonne Lab.
+
+-   <https://www.open-mpi.org/>
+    Commonly used implmentation. See especially the FAQ.
+
+-   <https://computing.llnl.gov/tutorials/mpi/>
+    Tutorial from LLNL
+
+
+### Hello, world MPI program example from LLNL (Lawrence Livermore National Lab, MPI tutorial)
+
+On blackjack, file is located at `/home/mooreb/examples/mpi/openmpi/llnl/mpi_hello.c`
+
+https://computing.llnl.gov/tutorials/mpi/samples/C/mpi_hello.c
+
+```C
+/******************************************************************************
+* FILE: mpi_hello.c
+* DESCRIPTION:
+*   MPI tutorial example code: Simple hello world program
+* AUTHOR: Blaise Barney
+* LAST REVISED: 03/05/10
+******************************************************************************/
+#include "mpi.h"
+#include <stdio.h>
+#include <stdlib.h>
+#define  MASTER     0
+
+int main (int argc, char *argv[])
+{
+int   numtasks, taskid, len;
+char hostname[MPI_MAX_PROCESSOR_NAME];
+
+MPI_Init(&argc, &argv);
+MPI_Comm_size(MPI_COMM_WORLD, &numtasks);
+MPI_Comm_rank(MPI_COMM_WORLD,&taskid);
+MPI_Get_processor_name(hostname, &len);
+printf ("Hello from task %d on %s!\n", taskid, hostname);
+if (taskid == MASTER)
+   printf("MASTER: Number of MPI tasks is: %d\n",numtasks);
+MPI_Finalize();
+}
+```
+
+### Copy, compile the hello, world MPI example
+
+```
+mooreb@blackjack:~> mkdir testmpi3
+mooreb@blackjack:~> cd testmpi3
+mooreb@blackjack:~/testmpi3> cp /home/mooreb/examples/mpi/openmpi/llnl/mpi_hello.c .
+mooreb@blackjack:~/testmpi3> cp /home/mooreb/examples/mpi/openmpi/llnl/mpirun.pbs .
+mooreb@blackjack:~/testmpi3> module load openmpi/3.0.0
+mooreb@blackjack:~/testmpi3> mpicc -O2 -o mpi_hello mpi_hello.c
+mooreb@blackjack:~/testmpi3> ls
+mpi_hello.c  mpi_hellp  mpirun.pbs
+mooreb@blackjack:~/testmpi3>
+```
+
+### Running mpi hello, world interactively
+
+Do this for testing/development only!  For production runs use the job scheduler.
+
+With such a small program, you can run an few processes interactive from
+the command line.
+
+```
+mooreb@blackjack:~/testmpi3> mpirun -np 4 ./mpi_hello
+Hello from task 1 on blackjack!
+Hello from task 3 on blackjack!
+Hello from task 0 on blackjack!
+MASTER: Number of MPI tasks is: 4
+Hello from task 2 on blackjack!
+mooreb@blackjack:~/testmpi3>
+```
+
+### PBS script for mpi hello, world
+
+```bash
+#!/bin/bash
+# File mpirun.pbs
+# Runs a simple mpi job on bigjack (e.g. a hello, world)
+# Brian.Moore@sdstate.edu ~May 2017
+
+#PBS -q debug
+#PBS -l nodes=2:ppn=12
+#PBS -l walltime=00:30:00
+
+. ${MODULESHOME}/init/sh
+module load openmpi
+
+cd $PBS_O_WORKDIR
+cat $PBS_NODEFILE | uniq
+
+date
+# Use below if IB is available (batch2 queue)
+#time mpirun -np $PBS_NP ./mpi_hello
+# If running on debug nodes, use only tcp as IB is not present
+time mpirun --mca btl tcp,self -np $PBS_NP ./mpi_hello
+date
+```
+
 ### Cluster job schedulers
 
 Commonly used Linux cluster scheduler/resource managers:
@@ -95,120 +203,7 @@ Note: the `man` pages for some of these (for example `showq`) may only
 be available on `bigjack`. `ssh` to `bigjack` to read `man` page then
 come back to `blackjack`
 
-### MPI: Message Passing Interface
 
-MPI is an API (application programming interface) for distributed memory
-computing. Several implementations exist. Usually a C or fortran (less
-commonly C++) source code.
-
--   <http://www.mcs.anl.gov/research/projects/mpi/>
-    The standard definition, from Argonne Lab.
-
--   <https://www.open-mpi.org/>
-    Commonly used implmentation. See especially the FAQ.
-
--   <https://computing.llnl.gov/tutorials/mpi/>
-    Tutorial from LLNL
-
-
-
-```C
-/******************************************************************************
-* FILE: mpi_hello.c
-* DESCRIPTION:
-*   MPI tutorial example code: Simple hello world program
-* AUTHOR: Blaise Barney
-* LAST REVISED: 03/05/10
-******************************************************************************/
-#include "mpi.h"
-#include <stdio.h>
-#include <stdlib.h>
-#define  MASTER     0
-
-int main (int argc, char *argv[])
-{
-int   numtasks, taskid, len;
-char hostname[MPI_MAX_PROCESSOR_NAME];
-
-MPI_Init(&argc, &argv);
-MPI_Comm_size(MPI_COMM_WORLD, &numtasks);
-MPI_Comm_rank(MPI_COMM_WORLD,&taskid);
-MPI_Get_processor_name(hostname, &len);
-printf ("Hello from task %d on %s!\n", taskid, hostname);
-if (taskid == MASTER)
-   printf("MASTER: Number of MPI tasks is: %d\n",numtasks);
-MPI_Finalize();
-}
-```
-
-### Copy, compile the hello, world MPI example
-
-```
-mooreb@blackjack:~> mkdir testmpi
-mooreb@blackjack:~> cd testmpi
-mooreb@blackjack:~/testmpi> cp /home/mooreb/examples/mpi/openmpi/llnl/mpi_hello.c .
-mooreb@blackjack:~/testmpi> cp /home/mooreb/examples/mpi/openmpi/llnl/mpirun.pbs .
-mooreb@blackjack:~/testmpi> module load openmpi
-mooreb@blackjack:~/testmpi> mpicc -O2 -o mpi_hello mpi_hello.c
-mooreb@blackjack:~/testmpi> ls
-mpi_hello  mpi_hello.c  mpirun.pbs
-mooreb@blackjack:~/testmpi>
-```
-
-### Running mpi hello, world interactively
-
-With such a small program, you can run an few processes interactive from
-the command line.
-
-```
-mooreb@blackjack:~/testmpi> mpirun -np 4 ./mpi_hello
---------------------------------------------------------------------------
-WARNING: There is at least non-excluded one OpenFabrics device found,
-[...]
-
-  Local host: blackjack
---------------------------------------------------------------------------
-Hello from task 0 on blackjack!
-MASTER: Number of MPI tasks is: 4
-Hello from task 3 on blackjack!
-Hello from task 2 on blackjack!
-Hello from task 1 on blackjack!
-[blackjack:04067] 3 more processes have sent help message help-mpi-btl-openib.txt / no active ports found
-[blackjack:04067] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
-mooreb@blackjack:~/testmpi> mpirun --mca btl tcp,self -np 4 ./mpi_hello
-Hello from task 0 on blackjack!
-MASTER: Number of MPI tasks is: 4
-Hello from task 1 on blackjack!
-Hello from task 2 on blackjack!
-Hello from task 3 on blackjack!
-mooreb@blackjack:~/testmpi>
-```
-
-### PBS script for mpi hello, world
-
-```bash
-#!/bin/bash
-# File mpirun.pbs
-# Runs a simple mpi job on bigjack (e.g. a hello, world)
-# Brian.Moore@sdstate.edu ~May 2017
-
-#PBS -q debug
-#PBS -l nodes=2:ppn=12
-#PBS -l walltime=00:30:00
-
-. ${MODULESHOME}/init/sh
-module load openmpi
-
-cd $PBS_O_WORKDIR
-cat $PBS_NODEFILE | uniq
-
-date
-# Use below if IB is available (batch2 queue)
-#time mpirun -np $PBS_NP ./mpi_hello
-# If running on debug nodes, use only tcp as IB is not present
-time mpirun --mca btl tcp,self -np $PBS_NP ./mpi_hello
-date
-```
 
 ### PBS submit
 
