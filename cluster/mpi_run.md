@@ -29,7 +29,6 @@ Resources for more information
     “Why High Throughput Computing” slides by Lauren Michael of
     Wisconsin’s CHTC.
 
-
 ## Shared-memory vs. Distributed memory computing
 
 Shared memory (multicore, [typically] single server), e.g. openmp
@@ -50,20 +49,68 @@ by Frank Willmore at Univ. Texas
 From “Why High Throughput Computing” slides by Lauren Michael of
 Wisconsin’s CHTC
 
+
+### Cluster job schedulers
+
+Commonly used Linux cluster scheduler/resource managers:
+
+-   Moab/TORQUE, <http://www.adaptivecomputing.com/>
+    We use this.
+
+-   Slurm, <http://slurm.schedmd.com/>
+
+-   Sun Grid Engine, now migrated to Open Grid Scheduler,
+    <http://gridscheduler.sourceforge.net/>
+
+-   IBM Platform LSF,
+    <http://www-03.ibm.com/systems/in/platformcomputing/products/lsf/>
+
+What do they do?
+
+They decide how a given job gets migrated out to the nodes and started
+up (resource management), also how the waiting (idle) jobs get
+rearranged or moved around to make things either more fair, more
+efficient, or to attempt to meet certain target metrics (job
+scheduling).
+
+### Commonly used Moab/TORQUE commands
+
+-   `showq`
+    Shows jobs in the queue
+
+-   `qsub`
+    Submit a job to the queue
+
+-   `qstat`
+    Shows your jobs and their status, some other information about
+    queues
+
+-   `checkjob`
+    Detailed information about one specific job
+
+-   `pbsnodes`
+    Information about nodes and queues, what’s available, status, etc.
+
+Note: the `man` pages for some of these (for example `showq`) may only
+be available on `bigjack`. `ssh` to `bigjack` to read `man` page then
+come back to `blackjack`
+
 ### MPI: Message Passing Interface
 
 MPI is an API (application programming interface) for distributed memory
 computing. Several implementations exist. Usually a C or fortran (less
 commonly C++) source code.
 
--   <http://www.mcs.anl.gov/research/projects/mpi/>\
+-   <http://www.mcs.anl.gov/research/projects/mpi/>
     The standard definition, from Argonne Lab.
 
--   <https://www.open-mpi.org/>\
+-   <https://www.open-mpi.org/>
     Commonly used implmentation. See especially the FAQ.
 
--   <https://computing.llnl.gov/tutorials/mpi/>\
+-   <https://computing.llnl.gov/tutorials/mpi/>
     Tutorial from LLNL
+
+
 
 ```C
 /******************************************************************************
