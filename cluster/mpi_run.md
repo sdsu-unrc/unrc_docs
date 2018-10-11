@@ -1,14 +1,17 @@
 ---
-Author:
-- |
-    Brian Moore, University Networking and Research Computing (UNRC)     
-    South Dakota State University
-Title: |
-    Hoe to run an mpi job on the cluster
+
+Running a job on the cluster: BLAST+
+===
+
+[Brian.Moore@sdstate.edu](Brian.Moore@sdstate.edu)  University Networking and Research Computing (UNRC)
+
 ---
 
+# Running an MPI job on the cluster:  Hello, World
 
-# Parallel computing
+In this document we take you through how to compile and run a first MPI program on the cluster, an MPI "Hello, World" program.
+
+# Introduction: Parallel computing
 
 Resources for more information
 
@@ -29,22 +32,23 @@ Resources for more information
     “Why High Throughput Computing” slides by Lauren Michael of
     Wisconsin’s CHTC.
 
+
 ## Shared-memory vs. Distributed memory computing
 
-sDared memory (multicore, [typically] single server), e.g. openmp
+Shared memory (multicore, [typically] single server), e.g. openmp
 
-![image](shared-TACC.png)
+![Schematic figure of shared memory processing, from TACC](https://raw.githubusercontent.com/sdsu-unrc/unrc_docs/master/cluster/shared-TACC.png)
 
-distributed memory (one job runs on several servers), e.g. mpi
+Distributed memory (one job runs on several servers), e.g. MPI
 
-![image](dist-TACC.png)
+![Schematic figure of distributed memory processing, from TACC](https://raw.githubusercontent.com/sdsu-unrc/unrc_docs/master/cluster/dist-TACC.png)
 
 From “Introduction to Parallel Computing” slides from TACC presentation
 by Frank Willmore at Univ. Texas
 
 ## High Throughput Computing
 
-![image](hpc-htc-lmichael-uwisc_crop.png)
+![Graphical explanation of High Throughput Computing, contrasted with HPC, from Lauren Michael at U Wisc](https://raw.githubusercontent.com/sdsu-unrc/unrc_docs/master/cluster/hpc-htc-lmichael-uwisc_crop.png)
 
 From “Why High Throughput Computing” slides by Lauren Michael of
 Wisconsin’s CHTC
@@ -93,7 +97,7 @@ MPI_Finalize();
 }
 ```
 
-### copy, compile the hello, world MPI example
+### Copy, compile the hello, world MPI example
 
 ```
 mooreb@blackjack:~> mkdir testmpi
@@ -107,7 +111,7 @@ mpi_hello  mpi_hello.c  mpirun.pbs
 mooreb@blackjack:~/testmpi>
 ```
 
-### running mpi hello, world interactively
+### Running mpi hello, world interactively
 
 With such a small program, you can run an few processes interactive from
 the command line.
