@@ -2,11 +2,9 @@
 
 # Running an MPI job on the cluster:  Hello, World
 
-===
 
-[Brian.Moore@sdstate.edu](Brian.Moore@sdstate.edu)  University Networking and Research Computing (UNRC)
+[Brian.Moore@sdstate.edu](https://www.sdstate.edu/directory/brian-moore)  University Networking and Research Computing (UNRC)
 
-===
 
 In this document we take you through how to compile and run a first MPI program on the cluster, an MPI "Hello, World" program.
 
