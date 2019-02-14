@@ -186,10 +186,128 @@ toc
 norm(A*x-b)
 ```
 
-This
+This MATLAB script creates a fairly big random vector and 2D array, and then solves the Ax=b matrix problem, using MATLAB's built in solver, which is implicitly multithreaded.  So we will request an entire compute node in our SLURM script, `matlab.slurm`
+
+```bash
+#!/bin/bash
+
+#SBATCH --job-name=matlab       # Job name
+#SBATCH --nodes=1               # Number of nodes
+#SBATCH --ntasks-per-node=40    # CPUs per node (MAX=40 for CPU nodes and 80 for GPU)
+#SBATCH --output=out-%j-%N.log  # Standard output (log file)
+#SBATCH --partition=test        # Partition/Queue
+#SBATCH --time=72:00:00         # Maximum walltime
+
+module purge
+module use /cm/shared/modulefiles_local
+module load shared
+module load slurm/17.11.8
+module load matlab/R2018b
+module list
+
+date
+time matlab -nodisplay < matrixsoln.m
+date
+```
+
+The SLURM script is a `bash` script.  The lines with `#SBATCH` are comments to `bash` but when submitted to SLURM they are interpreted as resource requests.  Resources are things such as processors, memory, time, etc.  There are many possible resources one can request, the above script just give a simple example.
+
+The two lines:
+```bash
+#SBATCH --nodes=1               # Number of nodes
+#SBATCH --ntasks-per-node=40    # CPUs per node (MAX=40 for CPU nodes and 80 for GPU)
+```
+
+specify the nodes and tasks (processors) we want.  Since we know in this case (because of prior testing) that MATLAB will try to grab all processors, we ask for all on an node.
+
+The `partition` selection is important, because we know we want a compute node, and if we submit to the default queue instead, we could wind up with a big-mem or gpu node and we don't want that.
+
+The `time` specification is the maximum walltime (real, elapsed time) the running job can have.  When that time is reached, if your job is still running, it will be terminated.
+
+After the `#SBATCH` resource request lines, we have module commands.  We load the modules we need for this job.  In general, we always want to use the first four lines of the `module` requests, then we add the specific extra modules we want for this job, matlab, in this case.
+
+#### Running the SLURM job
+
+To run the example, we need to create a local folder, first copy the MATLAB script and SLURM script to your own local folder.
+
+```ShellSession
+[brian.moore@login ~]$ mkdir matlabtest
+[brian.moore@login ~]$ cd matlabtest/
+[brian.moore@login matlabtest]$ cp /examples/matlab/matlab.slurm .
+[brian.moore@login matlabtest]$ cp /examples/matlab/matrixsoln.m .
+[brian.moore@login matlabtest]$ ls
+matlab.slurm  matrixsoln.m
+[brian.moore@login matlabtest]$
+```
+
+Now submit the job.
+
+```ShellSession
+[brian.moore@login matlabtest]$ sbatch matlab.slurm
+Submitted batch job 18262
+```
+
+After submitting the job, you can use `squeue` to see if it is in the system
+
+
+```ShellSession
+[brian.moore@login matlabtest]$ squeue
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+             18233      test  openmpi jeffrey.  R 1-18:47:01      5 node[020-024]
+             18238      defq PLATANUS software  R 1-16:41:35      1 big-mem002
+             18248      defq PLATANUS software  R 1-02:04:42      1 big-mem003
+             18256      test starccm. dillon.p  R    3:13:33      6 node[001-006]
+             18262      test   matlab brian.mo  R       0:06      1 node007
+```
+
+We can see it running, job number 18262, on node007.  When it is done the complete output file will be in the folder.  Display it in the terminal with the `more` command.
+
+```ShellSession
+[brian.moore@login matlabtest]$ ll
+total 0
+-rw-r--r-- 1 brian.moore domain users 540 Feb 14 14:19 matlab.slurm
+-rw-r--r-- 1 brian.moore domain users 159 Feb 14 14:19 matrixsoln.m
+-rw-r--r-- 1 brian.moore domain users 564 Feb 14 14:21 out-18262-node007.log
+[brian.moore@login matlabtest]$
+[brian.moore@login matlabtest]$ more out-18262-node007.log
+
+Currently Loaded Modules:
+  1) shared   2) slurm/17.11.8   3) matlab/R2018b
+
+
+
+Thu Feb 14 14:21:04 CST 2019
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2018 The MathWorks, Inc.
+                   R2018b (9.5.0.944444) 64-bit (glnxa64)
+                              August 28, 2018
+
+
+To get started, type doc.
+For product information, visit www.mathworks.com.
+
+>> >> >> >> >> >> >> >> Elapsed time is 13.110310 seconds.
+>>
+ans =
+
+   1.2815e-08
+
+>>
+real    0m54.310s
+user    3m47.598s
+sys     1m24.934s
+Thu Feb 14 14:21:58 CST 2019
+[brian.moore@login matlabtest]$
+```
+
+
+
 
 ### Disk quotas and policies
 
+Each user has a folder created in `/home` upon first login, with 100 GB quota per user.
+Users that need more disk space to run can request a folder be created in the scratch area, `/gpfs/scratch`, part of the GPFS shared file system.  No user quotas are implemented in scratch, but a data expiration policy will eventually be applied and older data will be deleted.  Currently, no backups are running yet. Eventually we will have tape backups on home, but not scratch.
 
 ### Contact
 
