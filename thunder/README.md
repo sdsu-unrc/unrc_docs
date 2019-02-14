@@ -111,9 +111,9 @@ Notice in the case above, the environment module system was smart enough to real
 
 ### SLURM scheduler
 
-The cluster has one login node (`roaringthunder`) and many identical worker nodes behind a private network switch. In our case we have 60 worker nodes (56 compute, 5 big-mem, 4 gpu).  To run on the worker nodes, we submit a batch script to the scheduler.
+The cluster has one login node (`roaringthunder`) and many identical worker nodes behind a private network switch. In our case we have 65 worker nodes (56 compute, 5 big-mem, 4 gpu).  To run on the worker nodes, we submit a batch script to the scheduler.
 
-Don't run long and resource intensive jobs on the login node!!  Use the login node to test your application and code, then deploy to the nodes.
+**Don't run long and resource intensive jobs on the login node!!  Use the login node to test your application and code, then deploy to the nodes.**
 
 On `thunder`, the scheduler is SLURM, which is the most commonly used scheduler on HPC batch systems.  The old cluster ran Moab/PBS, a different kind of scheduler.
 
@@ -151,7 +151,7 @@ The output of `sinfo` shows the partitions and what the nodes are doing in the p
 
 Note especially here that the `test` partition has just the 56 compute nodes in it.  If you are running compute intensive, or just general purpose jobs, choose the test partition for your jobs.  The `defq` partition has *all* nodes in it, a mixture of compute, gpu and big-mem.  If you don't know for sure how to select the kind of node you want in your submit script, ask us, or use the `test` partition only.
 
-More information about `squeue`, `squeue` and other SLURM commands can be obtained with the Linux `man` command, for example `man sinfo`.
+More information about `squeue`, `sinfo` and other SLURM commands can be obtained with the Linux `man` command, for example `man sinfo`.
 
 Other important SLURM commands are `sbatch`, to submit a SLURM job, `scancel`, and `sacct`, to see information about a job, and `srun`.
 
