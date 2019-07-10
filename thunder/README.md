@@ -139,17 +139,21 @@ The PARTITION header refers to the SLURM partition; a partition is a group of no
 We can see partition and node information with the `sinfo` command.
 
 ```ShellSession
-[brian.moore@login ~]$ sinfo
+[root@login lib]# sinfo
 PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
-defq*        up   infinite     25  alloc big-mem[002-003],node[001-018,020-024]
-defq*        up   infinite     40   idle big-mem[001,004-005],gpu[001-004],node[019,025-056]
-test         up   infinite     23  alloc node[001-018,020-024]
-test         up   infinite     33   idle node[019,025-056]
+all          up 14-00:00:0     18    mix big-mem005,node[001,006-007,009-013,021,029,031,036-037,043,054-056]
+all          up 14-00:00:0     43  alloc big-mem[001-004],node[002-005,008,014-020,022-028,030,032-035,038-042,044-053]
+all          up 14-00:00:0      4   idle gpu[001-004]
+compute*     up 14-00:00:0     17    mix node[001,006-007,009-013,021,029,031,036-037,043,054-056]
+compute*     up 14-00:00:0     39  alloc node[002-005,008,014-020,022-028,030,032-035,038-042,044-053]
+bigmem       up 14-00:00:0      1    mix big-mem005
+bigmem       up 14-00:00:0      4  alloc big-mem[001-004]
+gpu          up 14-00:00:0      4   idle gpu[001-004]
 ```
 
 The output of `sinfo` shows the partitions and what the nodes are doing in the partition; alloc means jobs running, idle means available to accept jobs.
 
-Note especially here that the `test` partition has just the 56 compute nodes in it.  If you are running compute intensive, or just general purpose jobs, choose the test partition for your jobs.  The `defq` partition has *all* nodes in it, a mixture of compute, gpu and big-mem.  If you don't know for sure how to select the kind of node you want in your submit script, ask us, or use the `test` partition only.
+We have four partitions configured. The default partition is compute which is why there is an asteric next to it. This partition contains 56 compute nodes that each have 40 cores and 196GB of RAM. The bigmem partition contains five nodes that each have 3TB of RAM and 80 cores. The gpu partition contains 4 GPU nodes each with 40 Cores 724GB of RAM. GPU001-003 contain 2 NVIDIA P100s and GPU004 contains 2 NVIDIA V100s. The all partition includes all the nodes.
 
 More information about `squeue`, `sinfo` and other SLURM commands can be obtained with the Linux `man` command, for example `man sinfo`.
 
@@ -311,4 +315,5 @@ Users that need more disk space to run can request a folder be created in the sc
 
 ### Contact
 
-[Brian Moore](https://www.sdstate.edu/directory/brian-moore)
+[Luke Gassman](https://www.sdstate.edu/directory/Luke-Gassman)
+[Chad Julius](https://www.sdstate.edu/directory/Chad-Julius)
